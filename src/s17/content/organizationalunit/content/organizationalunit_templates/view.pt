@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="s17.content.organizationalunit">
+    <body>
+
+    <metal:main fill-slot="main">
+        <tal:main-macro metal:define-macro="main">
+
+            <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+            <h1 class="documentFirstHeading" tal:content="context/title" />
+
+            <p class="documentDescription" tal:content="context/description" />
+
+            <div tal:replace="structure provider:plone.belowcontenttitle" />
+
+            <div tal:replace="structure provider:plone.abovecontentbody" />
+
+            <p> The template is rendering </p>
+
+            <div id="area_manager" class="field" tal:condition="context/area_manager">
+                <a>Alternative content</a>
+                <div class="area_manager" tal:content="structure view/w/area_manager/render" />
+            </div>
+
+            <div tal:replace="structure provider:plone.belowcontentbody" />
+        </tal:main-macro>
+    </metal:main>
+
+    </body>
+</html>

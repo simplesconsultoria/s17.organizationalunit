@@ -1,0 +1,31 @@
+*** Settings ***
+
+Resource  plone.txt
+
+Suite Setup  Setup
+
+*** Variables ***
+
+${input_identifier} =  input#form-widgets-image-input
+
+*** Test cases ***
+
+Test Add Multimedia
+    Goto Homepage
+    Add OrganizationalUnit  Area of company  description
+
+*** Keywords ***
+
+Setup
+    Log In  admin  admin
+
+Add OrganizationalUnit
+    [arguments]  ${title}  ${description}
+
+    Open Add New Menu
+    Click Link  css=a#s17-organizationalunit
+    Page Should Contain  Add Organizational Unit
+    Input Text  css=input#form-widgets-IBasic-title  ${title}
+    Input Text  css=textarea#form-widgets-IBasic-description  ${description}
+    Click Button  Save
+    Page Should Contain  Item created
