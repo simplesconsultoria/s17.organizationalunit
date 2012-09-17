@@ -7,9 +7,10 @@ from zope.interface.verify import verifyClass, verifyObject
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 
+from s17.person.employee.content.employee import IEmployee
+
 from s17.content.organizationalunit.content.organizationalunit import IOrganizationalUnit
 from s17.content.organizationalunit.content.organizationalunit import OrganizationalUnit
-
 from s17.content.organizationalunit.testing import INTEGRATION_TESTING
 
 
@@ -35,3 +36,8 @@ class OrganizationalUnitTestCase(unittest.TestCase):
     def test_interface(self):
         self.assertTrue(IOrganizationalUnit.providedBy(self.ou))
         self.assertTrue(verifyObject(IOrganizationalUnit, self.ou))
+
+    def test_add_employee(self):
+        self.ou.invokeFactory('s17.employee', 'e1')
+        e1 = self.ou['e1']
+        self.assertTrue(verifyObject(IEmployee, e1))

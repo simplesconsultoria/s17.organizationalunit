@@ -18,10 +18,12 @@ class Fixture(PloneSandboxLayer):
         import s17.content.organizationalunit
         self.loadZCML(package=s17.content.organizationalunit)
         z2.installProduct(app, 's17.content.organizationalunit')
+        z2.installProduct(app, 's17.person.employee')
 
     def setUpPloneSite(self, portal):
         # Install into Plone site using portal_setup
         self.applyProfile(portal, 's17.content.organizationalunit:default')
+        self.applyProfile(portal, 's17.person.employee:default')
 
     def tearDownZope(self, app):
         # Uninstall product
