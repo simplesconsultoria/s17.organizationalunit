@@ -49,6 +49,7 @@ setup(name='s17.content.organizationalunit',
           'plone.behavior',
           'plone.app.dexterity>=1.2.1',
           'plone.app.referenceablebehavior',
+          's17.person.employee',
       ],
       extras_require={
         'test': ['plone.app.testing'],
