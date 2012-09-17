@@ -41,3 +41,8 @@ class OrganizationalUnitTestCase(unittest.TestCase):
         self.ou.invokeFactory('s17.employee', 'e1')
         e1 = self.ou['e1']
         self.assertTrue(verifyObject(IEmployee, e1))
+
+    def test_add_ou(self):
+        self.ou.invokeFactory('s17.organizationalunit', 'sub_ou')
+        sub_ou = self.ou['sub_ou']
+        self.assertTrue(verifyObject(IOrganizationalUnit, sub_ou))
