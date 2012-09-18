@@ -20,10 +20,8 @@
 
             <div tal:replace="structure provider:plone.abovecontentbody" />
 
-            <p> The template is rendering </p>
-
             <div id="area_manager" class="field" tal:condition="context/area_manager">
-                <a>Alternative content</a>
+                <p>This is the manager</p>
                 <div class="area_manager" tal:content="structure view/w/area_manager/render" />
             </div>
 
