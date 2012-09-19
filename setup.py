@@ -1,7 +1,6 @@
 from setuptools import setup, find_packages
 import os
 
-
 version = '1.0a1.dev0'
 description = "A organizational unit content type for Plone and intranets"
 long_description = open("README.txt").read() + "\n" + \
@@ -9,17 +8,16 @@ long_description = open("README.txt").read() + "\n" + \
                    open(os.path.join("docs", "CREDITS.txt")).read() + "\n" + \
                    open(os.path.join("docs", "HISTORY.txt")).read()
 
-
 setup(name='s17.content.organizationalunit',
       version=version,
       description=description,
       long_description=long_description,
       classifiers=[
-        "Development Status :: 1 - Alpha",
+        "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 4.1",
         "Framework :: Plone :: 4.2",
+        "Framework :: Plone :: 4.3",
         "Intended Audience :: End Users/Desktop",
         "Intended Audience :: System Administrators",
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
@@ -45,10 +43,13 @@ setup(name='s17.content.organizationalunit',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'Products.CMFPlone>=4.1',
+          'Products.CMFPlone>=4.2',
           'plone.behavior',
+          'plone.directives.dexterity',
+          'plone.formwidget.contenttree',
           'plone.app.dexterity>=1.2.1',
           'plone.app.referenceablebehavior',
+          'z3c.relationfield',
           's17.person.employee',
       ],
       extras_require={
