@@ -55,12 +55,6 @@ class View(dexterity.DisplayForm):
         employees = self.get_child_employees()
         return len(employees) > 1
 
-    def has_ous(self):
-        """ Tell us if have child organizationalunits.
-        """
-        ous = self.get_child_ous()
-        return len(ous) > 1
-
     def get_child_ous(self):
         """ If it have child organizationalunits, then return them.
         """
