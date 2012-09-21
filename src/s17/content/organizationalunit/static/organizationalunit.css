@@ -1,0 +1,60 @@
+/*  General */
+
+.portaltype-s17-organizationalunit #father_ou{
+    margin-right: 10px;
+}
+
+.portaltype-s17-organizationalunit #area_manager #gestor{
+    Float: left;
+    margin-right: 10px;
+}
+
+.portaltype-s17-organizationalunit .section{
+    border-bottom: 3px solid;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+/* Subareas */
+
+.portaltype-s17-organizationalunit #list_ous{
+    margin-top: 35px;
+    margin-bottom: 30px;
+}
+
+.portaltype-s17-organizationalunit #list_ous .subarea{
+    border: 1px solid black;
+    padding: 20px;
+    margin-right: 2%;
+}
+
+.portaltype-s17-organizationalunit #list_ous .subarea:hover{
+    border-color: black;
+    color: #205C90 !important;
+}
+
+/* Employees table */
+
+.portaltype-s17-organizationalunit td.employee_cell {
+    text-align: center;
+}
+
+.portaltype-s17-organizationalunit .cell_content{
+    padding: 0px 20px 20px 0px;
+}
+
+.portaltype-s17-organizationalunit .cell_content img{
+    width:128px;
+    display: block;
+    height:128px;
+    margin: auto;
+}
+
+.portaltype-s17-organizationalunit .cell_content a{
+    margin: auto;
+}
+
+.portaltype-s17-organizationalunit #employee_table{
+    margin-top: 20px;
+    width: 100%;
+}

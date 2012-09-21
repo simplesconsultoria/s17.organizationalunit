@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_css" meta_type="Stylesheets Registry">
- <stylesheet
-    id="organizationalunit.css"
-    expression=""
-    authenticated="False"
-    />
+ <stylesheet title="" cacheable="True" enabled="1" media="screen" rel="stylesheet"
+    id="++resource++s17.content.organizationalunit/organizationalunit.css"
+    cookable="True"  rendering="import" expression=""/>
 </object>
