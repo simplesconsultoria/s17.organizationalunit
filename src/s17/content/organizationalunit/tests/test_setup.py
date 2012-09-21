@@ -11,7 +11,7 @@ from s17.content.organizationalunit.config import PROJECTNAME
 from s17.content.organizationalunit.testing import INTEGRATION_TESTING
 
 CSS = [
-    "organizationalunit.css",
+    "++resource++s17.content.organizationalunit/organizationalunit.css",
     ]
 
 
