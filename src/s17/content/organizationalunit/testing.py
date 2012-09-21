@@ -27,6 +27,7 @@ class Fixture(PloneSandboxLayer):
 
     def tearDownZope(self, app):
         # Uninstall product
+        z2.uninstallProduct(app, 's17.person.employee')
         z2.uninstallProduct(app, 's17.content.organizationalunit')
 
 
