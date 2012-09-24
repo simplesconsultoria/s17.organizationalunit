@@ -11,7 +11,7 @@ from plone.formwidget.contenttree import ObjPathSourceBinder
 
 from z3c.relationfield.schema import RelationList, RelationChoice
 
-from s17.content.organizationalunit import MessageFactory as _
+from s17.organizationalunit import MessageFactory as _
 
 
 class IOrganizationalUnit(form.Schema):

@@ -8,7 +8,7 @@ long_description = open("README.txt").read() + "\n" + \
                    open(os.path.join("docs", "CREDITS.txt")).read() + "\n" + \
                    open(os.path.join("docs", "HISTORY.txt")).read()
 
-setup(name='s17.content.organizationalunit',
+setup(name='s17.organizationalunit',
       version=version,
       description=description,
       long_description=long_description,
@@ -31,14 +31,14 @@ setup(name='s17.content.organizationalunit',
         "Topic :: Office/Business",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
-      keywords='s17 content organizationalunit organizational unit',
+      keywords='s17.organizationalunit organizational unit',
       author='Simples Consultoria',
       author_email='products@simplesconsultoria.com.br',
       url='http://www.simplesconsultoria.com.br',
       license='GPLv2',
       packages=find_packages('src'),
       package_dir={'': 'src'},
-      namespace_packages=['s17', 's17.content'],
+      namespace_packages=['s17',],
       include_package_data=True,
       zip_safe=False,
       install_requires=[

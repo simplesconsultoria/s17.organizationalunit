@@ -1,5 +1,5 @@
 ******************************
-s17.content.organizationalunit
+s17.organizationalunit
 ******************************
 
 .. contents::
@@ -33,5 +33,5 @@ organizational units to this one.
 Mostly Harmless
 ===============
 
-.. image:: https://secure.travis-ci.org/simplesconsultoria/s17.content.organizationalunit.png
-    :target: http://travis-ci.org/simplesconsultoria/s17.content.organizationalunit
+.. image:: https://secure.travis-ci.org/simplesconsultoria/s17.organizationalunit.png
+    :target: http://travis-ci.org/simplesconsultoria/s17.organizationalunit

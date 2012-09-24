@@ -15,28 +15,28 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: s17.content.organizationalunit\n"
+"Domain: s17.organizationalunit\n"
 
-#: s17/content/organizationalunit/configure.zcml:9
-msgid "s17.content.organizationalunit: Add Organizational Unit"
+#: s17.organizationalunit/configure.zcml:9
+msgid "s17.organizationalunit: Add Organizational Unit"
 msgstr ""
 
-#: s17/content/organizationalunit/profiles.zcml:9
-msgid "s17.content.organizationalunit: Install"
+#: s17.organizationalunit/profiles.zcml:9
+msgid "s17.organizationalunit: Install"
 msgstr ""
 
-#: s17/content/organizationalunit/profiles.zcml:18
-msgid "s17.content.organizationalunit: Uninstall"
+#: s17.organizationalunit/profiles.zcml:18
+msgid "s17.organizationalunit: Uninstall"
 msgstr ""
 
-#: s17/content/organizationalunit/profiles/default/s17.organizationalunit.xml
+#: s17.organizationalunit/profiles/default/s17.organizationalunit.xml
 msgid "Organizational Unit"
 msgstr ""
 
-#: s17/content/organizationalunit/profiles/default/s17.organizationalunit.xml
+#: s17.organizationalunit/profiles/default/s17.organizationalunit.xml
 msgid "Represents a specific field in a company"
 msgstr ""
 
-#: s17/content/organizationalunit/content/organizationalunit.py
+#: s17.organizationalunit/content/organizationalunit.py
 msgid "Area Manager"
 msgstr ""

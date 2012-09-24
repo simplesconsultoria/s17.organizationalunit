@@ -7,11 +7,11 @@ from plone.browserlayer.utils import registered_layers
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 
-from s17.content.organizationalunit.config import PROJECTNAME
-from s17.content.organizationalunit.testing import INTEGRATION_TESTING
+from s17.organizationalunit.config import PROJECTNAME
+from s17.organizationalunit.testing import INTEGRATION_TESTING
 
 CSS = [
-    "++resource++s17.content.organizationalunit/organizationalunit.css",
+    "++resource++s17.organizationalunit/organizationalunit.css",
     ]
 
 

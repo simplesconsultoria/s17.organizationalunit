@@ -1,7 +1,7 @@
 #! /bin/sh
 
-I18NDOMAIN="s17.content.organizationalunit"
-BASE_DIRECTORY="src/s17/content/organizationalunit"
+I18NDOMAIN="s17.organizationalunit"
+BASE_DIRECTORY="src/s17.organizationalunit"
 
 # Synchronise the templates and scripts with the .pot.
 i18ndude rebuild-pot --pot ${BASE_DIRECTORY}/locales/${I18NDOMAIN}.pot \

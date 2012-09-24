@@ -5,14 +5,14 @@ import doctest
 
 from plone.testing import layered
 
-from s17.content.organizationalunit.testing import FUNCTIONAL_TESTING
+from s17.organizationalunit.testing import FUNCTIONAL_TESTING
 
 
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTests([
         layered(doctest.DocFileSuite('tests/test_addcontent.txt',
-                                     package='s17.content.organizationalunit'),
+                                     package='s17.organizationalunit'),
                 layer=FUNCTIONAL_TESTING),
         ])
     return suite

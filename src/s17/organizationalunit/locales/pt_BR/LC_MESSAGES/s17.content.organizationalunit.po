@@ -14,26 +14,26 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: s17/content/organizationalunit/configure.zcml:9
-msgid "s17.content.organizationalunit: Add Organizational Unit"
-msgstr "s17.content.organizationalunit: Adicionar Unidade Organizacional"
+#: s17.organizationalunit/configure.zcml:9
+msgid "s17.organizationalunit: Add Organizational Unit"
+msgstr "s17.organizationalunit: Adicionar Unidade Organizacional"
 
-#: s17/content/organizationalunit/profiles.zcml:9
-msgid "s17.content.organizationalunit: Install"
-msgstr "s17.content.organizationalunit: Instalar"
+#: s17.organizationalunit/profiles.zcml:9
+msgid "s17.organizationalunit: Install"
+msgstr "s17.organizationalunit: Instalar"
 
-#: s17/content/organizationalunit/profiles.zcml:18
-msgid "s17.content.organizationalunit: Uninstall"
-msgstr "s17.content.organizationalunit: Desinstalar"
+#: s17.organizationalunit/profiles.zcml:18
+msgid "s17.organizationalunit: Uninstall"
+msgstr "s17.organizationalunit: Desinstalar"
 
-#: s17/content/organizationalunit/profiles/default/s17.organizationalunit.xml
+#: s17.organizationalunit/profiles/default/s17.organizationalunit.xml
 msgid "Organizational Unit"
 msgstr "Unidade Organizacional"
 
-#: s17/content/organizationalunit/profiles/default/s17.organizationalunit.xml
+#: s17.organizationalunit/profiles/default/s17.organizationalunit.xml
 msgid "Represents a specific field in a company"
 msgstr "Representa um campo específico em uma empresa"
 
-#: s17/content/organizationalunit/content/organizationalunit.py
+#: s17.organizationalunit/content/organizationalunit.py
 msgid "Area Manager"
 msgstr "Gestor"

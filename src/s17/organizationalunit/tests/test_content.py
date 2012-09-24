@@ -9,9 +9,9 @@ from plone.app.testing import setRoles
 
 from s17.person.employee.content.employee import IEmployee
 
-from s17.content.organizationalunit.content.organizationalunit import IOrganizationalUnit
-from s17.content.organizationalunit.content.organizationalunit import OrganizationalUnit
-from s17.content.organizationalunit.testing import INTEGRATION_TESTING
+from s17.organizationalunit.content.organizationalunit import IOrganizationalUnit
+from s17.organizationalunit.content.organizationalunit import OrganizationalUnit
+from s17.organizationalunit.testing import INTEGRATION_TESTING
 
 
 class OrganizationalUnitTestCase(unittest.TestCase):

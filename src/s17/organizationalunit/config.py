@@ -4,4 +4,4 @@
 
 __author__ = """Simples Consultoria <products@simplesconsultoria.com.br>"""
 __docformat__ = 'plaintext'
-PROJECTNAME = 's17.content.organizationalunit'
+PROJECTNAME = 's17.organizationalunit'

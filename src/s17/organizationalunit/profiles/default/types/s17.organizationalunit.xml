@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <object name="s17.organizationalunit"
    meta_type="Dexterity FTI"
-   i18n:domain="s17.content.organizationalunit"
+   i18n:domain="s17.organizationalunit"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic metadata -->
@@ -18,10 +18,10 @@
   </property>
 
   <!-- schema and class used for content items -->
-  <property name="schema">s17.content.organizationalunit.content.organizationalunit.IOrganizationalUnit</property>
-  <property name="klass">s17.content.organizationalunit.content.organizationalunit.OrganizationalUnit</property>
+  <property name="schema">s17.organizationalunit.content.organizationalunit.IOrganizationalUnit</property>
+  <property name="klass">s17.organizationalunit.content.organizationalunit.OrganizationalUnit</property>
 
-  <property name="add_permission">s17.content.organizationalunit.AddOrganizationalUnit</property>
+  <property name="add_permission">s17.organizationalunit.AddOrganizationalUnit</property>
 
   <property name="behaviors">
      <element value="plone.app.dexterity.behaviors.metadata.IBasic" />
