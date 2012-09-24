@@ -23,7 +23,7 @@ Add OrganizationalUnit
     [arguments]  ${title}  ${description}
 
     Open Add New Menu
-    Click Link  css=a#s17-organizationalunit
+    Click Link  css=a#organizationalunit
     Page Should Contain  Add Organizational Unit
     Input Text  css=input#form-widgets-IBasic-title  ${title}
     Input Text  css=textarea#form-widgets-IBasic-description  ${description}
