@@ -61,7 +61,7 @@ class View(dexterity.DisplayForm):
         catalog = getToolByName(self.context, 'portal_catalog')
         query = {}
         query['path'] = '/'.join(self.context.getPhysicalPath()) + '/'
-        query['portal_type'] = 's17.organizationalunit'
+        query['portal_type'] = 'OrganizationalUnit'
         content = catalog.searchResults(**query)
         return content
 

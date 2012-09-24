@@ -19,7 +19,7 @@ Functional test:
 
 Test add view save button:
 
-    >>> browser.open(portalURL + '/++add++s17.organizationalunit')
+    >>> browser.open(portalURL + '/++add++OrganizationalUnit')
     >>> browser.getControl(name='form.widgets.IBasic.title').value = 'Area of company'
     >>> browser.getControl(name='form.widgets.IBasic.description').value = 'Description'
     >>> browser.getControl(name='form.buttons.save').click()

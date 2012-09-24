@@ -26,7 +26,7 @@ class OrganizationalUnitTestCase(unittest.TestCase):
         self.portal.invokeFactory('Folder', 'test-folder')
         self.folder = self.portal['test-folder']
 
-        self.folder.invokeFactory('s17.organizationalunit', 'ou1')
+        self.folder.invokeFactory('OrganizationalUnit', 'ou1')
         self.ou = self.folder['ou1']
 
     def test_adding(self):
@@ -43,7 +43,7 @@ class OrganizationalUnitTestCase(unittest.TestCase):
         self.assertTrue(verifyObject(IEmployee, e1))
 
     def test_add_ou(self):
-        self.ou.invokeFactory('s17.organizationalunit', 'sub_ou')
+        self.ou.invokeFactory('OrganizationalUnit', 'sub_ou')
         sub_ou = self.ou['sub_ou']
         self.assertTrue(verifyObject(IOrganizationalUnit, sub_ou))
 
@@ -64,11 +64,11 @@ class OrganizationalUnitViewTest(unittest.TestCase):
 
     def create_ous(self):
         # Create organizationalunit objects
-        self.portal.invokeFactory('s17.organizationalunit', 'ou')
+        self.portal.invokeFactory('OrganizationalUnit', 'ou')
         self.ou = self.portal['ou']
-        self.ou.invokeFactory('s17.organizationalunit', 'subou')
+        self.ou.invokeFactory('OrganizationalUnit', 'subou')
         self.subou = self.ou['subou']
-        self.subou.invokeFactory('s17.organizationalunit', 'subsubou')
+        self.subou.invokeFactory('OrganizationalUnit', 'subsubou')
         self.subsubou = self.subou['subsubou']
 
     def create_employees(self):
