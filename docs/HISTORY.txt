@@ -4,4 +4,4 @@ Changelog
 1.0dev (unreleased)
 ^^^^^^^^^^^^^^^^^^^
 
-- Initial release.
+- Rename package from s17.content.organizationalunit to s17.organizationalunit [lepri]
