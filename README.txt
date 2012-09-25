@@ -21,13 +21,13 @@ wich are:
     - Description
     - Area manager
 
-It is designed to work with an employee from s17.person.employee
-product. In the field *Area Manager* we can start writing the name of the employee
-that manage that area and the widget will automatically give us the url pointing
-to that employee.
+It is designed to work with an employee from s17.employee product. In the
+field *Area Manager* we can start writing the name of the employee that manage
+that area and the widget will automatically give us the url pointing to that
+employee.
 
-Also this type is a container, so, we going to be able to add employees and more
-organizational units to this one.
+Also this type is a container, so, we going to be able to add employees and
+more organizational units to this one.
 
 
 Mostly Harmless

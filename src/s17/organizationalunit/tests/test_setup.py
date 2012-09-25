@@ -2,8 +2,6 @@
 
 import unittest2 as unittest
 
-from plone.browserlayer.utils import registered_layers
-
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 
@@ -25,6 +23,9 @@ class InstallTestCase(unittest.TestCase):
 
     def test_installed(self):
         self.assertTrue(self.qi.isProductInstalled(PROJECTNAME))
+
+    def test_dependencies_installed(self):
+        self.assertTrue(self.qi.isProductInstalled('s17.employee'))
 
     def test_cssregistry(self):
         resource_ids = self.portal.portal_css.getResourceIds()

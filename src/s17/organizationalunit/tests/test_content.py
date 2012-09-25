@@ -7,7 +7,7 @@ from zope.interface.verify import verifyClass, verifyObject
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 
-from s17.person.employee.content.employee import IEmployee
+from s17.employee.content.employee import IEmployee
 
 from s17.organizationalunit.content.organizationalunit import IOrganizationalUnit
 from s17.organizationalunit.content.organizationalunit import OrganizationalUnit
@@ -38,7 +38,7 @@ class OrganizationalUnitTestCase(unittest.TestCase):
         self.assertTrue(verifyObject(IOrganizationalUnit, self.ou))
 
     def test_add_employee(self):
-        self.ou.invokeFactory('s17.employee', 'e1')
+        self.ou.invokeFactory('Employee', 'e1')
         e1 = self.ou['e1']
         self.assertTrue(verifyObject(IEmployee, e1))
 
@@ -75,11 +75,11 @@ class OrganizationalUnitViewTest(unittest.TestCase):
         # Create Employees objects
         index = 1
         while index < 17:
-            self.ou.invokeFactory('s17.employee',
+            self.ou.invokeFactory('Employee',
                                   'employee-%s' % index)
             index += 1
-        self.subou.invokeFactory('s17.employee', 'subemployee')
-        self.subsubou.invokeFactory('s17.employee',
+        self.subou.invokeFactory('Employee', 'subemployee')
+        self.subsubou.invokeFactory('Employee',
                                     'subsubemployee')
 
     def test_father_ou(self):
