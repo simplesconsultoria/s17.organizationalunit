@@ -22,7 +22,7 @@ class IOrganizationalUnit(form.Schema):
         title=_(u'Area Manager'),
         default=[],
         value_type=RelationChoice(title=u"Area Manager",
-                      source=ObjPathSourceBinder(portal_type='s17.employee')),
+                      source=ObjPathSourceBinder(portal_type='Employee')),
         required=False,
         )
 
@@ -71,7 +71,7 @@ class View(dexterity.DisplayForm):
         catalog = getToolByName(self.context, 'portal_personcatalog')
         query = {}
         query['path'] = '/'.join(self.context.getPhysicalPath()) + '/'
-        query['portal_type'] = 's17.employee'
+        query['portal_type'] = 'Employee'
         content = catalog.searchResults(**query)
         return content
 
