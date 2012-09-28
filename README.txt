@@ -8,7 +8,10 @@ Life, the Universe, and Everything
 ----------------------------------
 
 This products provides a content type that represents a specific field in a
-company, such as a department or area. It is mostly useful for intranets, especially when used in conjunction with the package s17.employee since together they allow you to represent a full organizational chart as full-featured content objects.
+company, such as a department or area. It is mostly useful for intranets,
+especially when used in conjunction with the package s17.employee since
+together they allow you to represent a full organizational chart as full-
+featured content objects.
 
 Don't Panic
 -----------
@@ -29,7 +32,11 @@ organizational units inside this one.
 
 
 Mostly Harmless
-===============
+---------------
 
 .. image:: https://secure.travis-ci.org/simplesconsultoria/s17.organizationalunit.png
     :target: http://travis-ci.org/simplesconsultoria/s17.organizationalunit
+
+Have an idea? Found a bug? Let us know by `opening a support ticket`_.
+
+.. _`opening a support ticket`: https://github.com/simplesconsultoria/s17.organizationalunit/issues
