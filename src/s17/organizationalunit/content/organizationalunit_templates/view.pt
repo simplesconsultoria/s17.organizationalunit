@@ -99,9 +99,9 @@
                         tal:condition="not:nocall:picture"
                         tal:attributes="src string:${portal_url}/defaultUser.png" />
                 </a>
-                </tal:block>
                 <a tal:content="employee/Title"
-                    tal:attributes="href employee/getURL" />
+                    tal:attributes="href employee/absolute_url" />
+                </tal:block>
             </td>
         </tr>
     </table>
