@@ -113,8 +113,8 @@ class View(dexterity.DisplayForm):
         """ Return a batch of employees for navigation
         """
         contents = self.get_employees()
-        has_employees = self.has_employees()
-        if len(contents) < 9 and not snd:
+        has_employees = len(contents)
+        if has_employees < 9 and not snd:
             batch = Batch(contents, len(contents), int(b_start), orphan=0)
             return batch
         if has_employees and (not first) and (not snd):
