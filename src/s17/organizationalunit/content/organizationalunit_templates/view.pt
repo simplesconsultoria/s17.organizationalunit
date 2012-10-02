@@ -89,12 +89,16 @@
         <tr tal:define="bottom_row python:view.get_employee_batch(b_start, snd=True)"
             tal:condition="bottom_row">
             <td tal:repeat="employee bottom_row">
-                <tal:block define="picture nocall:employee/picture">
-                <img tal:condition="nocall:picture"
-                    tal:attributes="src string:${employee/getURL}/@@images/picture/mini" />
-                <img width="128"
-                    tal:condition="not:nocall:picture"
-                    tal:attributes="src string:${portal_url}/defaultUser.png" />
+                <tal:block define="employee employee/getObject;
+                                   picture nocall:employee/picture">
+                <a tal:attributes="href employee/absolute_url;
+                                   title employee/Title">
+                    <img tal:condition="nocall:picture"
+                        tal:attributes="src string:${employee/absolute_url}/@@images/picture/mini" />
+                    <img width="128"
+                        tal:condition="not:nocall:picture"
+                        tal:attributes="src string:${portal_url}/defaultUser.png" />
+                </a>
                 </tal:block>
                 <a tal:content="employee/Title"
                     tal:attributes="href employee/getURL" />
