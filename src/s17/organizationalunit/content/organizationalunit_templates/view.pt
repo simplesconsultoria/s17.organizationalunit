@@ -5,76 +5,111 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="s17.organizationalunit">
-    <body>
+<body>
 
-    <metal:main fill-slot="main">
-        <tal:main-macro metal:define-macro="main">
-            <tal:organizationalunitview
-                tal:define="view_widget view/w;
-                            employee_items view/get_child_employees;
-                            ous_items view/get_child_ous;
-                            b_start python:request.get('b_start', 0);
-                            batch python:view.get_employee_batch(b_start);">
+<metal:main fill-slot="main">
+<tal:main-macro metal:define-macro="main">
+<tal:organizationalunitview
+    tal:define="view_widget view/w;
+                employees view/get_employees;
+                children view/get_children;
+                b_start python:request.get('b_start', 0);
+                batch python:view.get_employee_batch(b_start)">
 
-                <div tal:replace="structure provider:plone.abovecontenttitle" />
+    <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-                <h1 class="documentFirstHeading" tal:content="context/title" />
+    <h1 class="documentFirstHeading" tal:content="context/Title" />
 
-                <p class="documentDescription" tal:content="context/description" />
+    <p class="documentDescription"
+        tal:condition="context/description"
+        tal:content="context/description" />
 
-                <div tal:define="father view/get_father_ou"
-                    tal:condition="father">
-                    <label id="father_ou">Subarea of:</label>
-                    <a tal:content="father/title" tal:attributes="href father/url"/>
-                </div>
+    <div id="subarea_of"
+        tal:define="parents view/get_parents;
+                    portal_state view/portal_state;
+                    is_rtl portal_state/is_rtl;
+                    portal_url portal_state/portal_url"
+        tal:condition="parents">
+        <label i18n:translate="">Subarea of</label>
+        <span tal:repeat="parent parents"
+              tal:attributes="dir python:is_rtl and 'rtl' or 'ltr';
+                              id string:ou-parent-${repeat/parent/number}">
+            <tal:item define="url parent/absolute_url; title parent/Title">
+            <a tal:omit-tag="not:url"
+               tal:attributes="href url; title parent/Title"
+               tal:content="title">parent</a>
+            <span class="breadcrumbSeparator"
+                tal:condition="not:repeat/parent/end">
+                <tal:ltr condition="not:is_rtl">/</tal:ltr>
+                <tal:rtl condition="is_rtl">\</tal:rtl>
+            </span>
+            </tal:item>
+        </span>
+    </div>
 
-                <div id="area_manager" class="field"
-                    tal:condition="context/area_manager">
-                    <label id="gestor">Gestor:</label>
-                    <a tal:replace="structure view_widget/area_manager/render"/>
-                </div>
+    <div class="field" tal:condition="context/area_manager">
+        <label id="area_manager" i18n:translate="">Area manager</label>
+        <a tal:replace="python:view_widget['area_manager'].value[0]" />
+    </div>
 
-                <tal:subareas tal:condition="python: len(ous_items) != 1">
-                    <h3 class="section"> Subareas </h3>
-                    <div id="list_ous">
-                        <span tal:repeat="ou_item ous_items">
-                            <a tal:condition="python:ou_item.getURL() != context.absolute_url()"
-                               class="subarea" tal:content="ou_item/Title"
-                               tal:attributes="href ou_item/getURL"/>
-                        </span>
-                    </div>
-                </tal:subareas>
+    <tal:subareas define="has_children python:len(children)">
+    <h2 class="section" i18n:translate="">Subareas</h2>
+    <ul id="subareas" tal:condition="has_children">
+        <tal:block repeat="child children">
+        <li tal:condition="python:child.getURL() != context.absolute_url()">
+            <a tal:content="child/Title"
+                tal:attributes="href child/getURL; title child/Title" />
+        </li>
+        </tal:block>
+    </ul>
+    <p tal:condition="not:has_children"
+        i18n:translate="">This area has no subareas.</p>
+    </tal:subareas>
 
-                <tal:employees tal:condition="batch">
-                    <h3 class="section"> Employees on this area </h3>
-                        <table id="employee_table">
-                            <tr tal:define="top_row python:view.get_employee_batch(b_start, first=True)"
-                                tal:condition="top_row">
-                                <td class="employee_cell" tal:repeat="employee top_row">
-                                    <div class="cell_content">
-                                        <img class="emp_img" tal:attributes="src string:${employee/getURL}/@@images/picture/thumb"/>
-                                        <a class="emp_link" tal:content="employee/Title" tal:attributes="href employee/getURL"/>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr tal:define="bottom_row python:view.get_employee_batch(b_start, snd=True)"
-                                tal:condition="bottom_row">
-                                <td class="employee_cell" tal:repeat="employee bottom_row">
-                                    <div class="cell_content">
-                                        <img class="emp_img" tal:attributes="src string:${employee/getURL}/@@images/picture/thumb"/>
-                                        <a class="emp_link" tal:content="employee/Title" tal:attributes="href employee/getURL"/>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table><br>
-                    <div tal:condition="python:len(batch) > 8" metal:use-macro="context/batch_macros/macros/navigation" />
-                </tal:employees>
-                
+    <h2 class="section" i18n:translate="">Employees on this area</h2>
+    <table id="employee-table" tal:condition="batch">
+        <tr tal:define="top_row python:view.get_employee_batch(b_start, first=True)"
+            tal:condition="top_row">
+            <td tal:repeat="employee top_row">
+                <tal:block define="employee employee/getObject;
+                                   picture nocall:employee/picture">
+                <a tal:attributes="href employee/absolute_url;
+                                   title employee/Title">
+                    <img tal:condition="nocall:picture"
+                        tal:attributes="src string:${employee/absolute_url}/@@images/picture/mini" />
+                    <img width="128"
+                        tal:condition="not:nocall:picture"
+                        tal:attributes="src string:${portal_url}/defaultUser.png" />
+                </a>
+                <a tal:content="employee/Title"
+                    tal:attributes="href employee/absolute_url" />
+                </tal:block>
+            </td>
+        </tr>
+        <tr tal:define="bottom_row python:view.get_employee_batch(b_start, snd=True)"
+            tal:condition="bottom_row">
+            <td tal:repeat="employee bottom_row">
+                <tal:block define="picture nocall:employee/picture">
+                <img tal:condition="nocall:picture"
+                    tal:attributes="src string:${employee/getURL}/@@images/picture/mini" />
+                <img width="128"
+                    tal:condition="not:nocall:picture"
+                    tal:attributes="src string:${portal_url}/defaultUser.png" />
+                </tal:block>
+                <a tal:content="employee/Title"
+                    tal:attributes="href employee/getURL" />
+            </td>
+        </tr>
+    </table>
+    <p tal:condition="not:batch" i18n:translate="">This area has no direct employees.</p>
+    <div metal:use-macro="context/batch_macros/macros/navigation"
+        tal:condition="python:len(batch) > 8" />
 
-                <div tal:replace="structure provider:plone.belowcontentbody" />
-            </tal:organizationalunitview>
-        </tal:main-macro>
-    </metal:main>
+    <div tal:replace="structure provider:plone.belowcontentbody" />
 
-    </body>
+</tal:organizationalunitview>
+</tal:main-macro>
+</metal:main>
+
+</body>
 </html>

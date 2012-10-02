@@ -3,32 +3,63 @@
 from five import grok
 
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.PloneBatch import Batch
 
 from plone.directives import form
 from plone.directives import dexterity
 
-from plone.formwidget.contenttree import ObjPathSourceBinder
+from zope.component import getMultiAdapter
+from zope.schema.interfaces import IContextSourceBinder
+from zope.schema.vocabulary import SimpleVocabulary
+from zope.site.hooks import getSite
+#from plone.formwidget.contenttree import ObjPathSourceBinder
+#from plone.formwidget.autocomplete import AutocompleteFieldWidget
 
-from z3c.relationfield.schema import RelationList, RelationChoice
+from z3c.relationfield.schema import Choice
+#from z3c.relationfield.schema import RelationList
+
+from plone.app.layout.navigation.interfaces import INavigationRoot
 
 from s17.organizationalunit import MessageFactory as _
 
 
+@grok.provider(IContextSourceBinder)
+def vocab_employees(context):
+    ct = getToolByName(context, 'portal_catalog')
+    query = {}
+    query['path'] = {'query': '/'.join(context.getPhysicalPath()),
+                     'depth': 2}
+    query['portal_type'] = 'Employee'
+    query['sort_on'] = 'sortable_title'
+    employees = [(b.Title, b.UID) for b in ct.searchResults(**query)]
+    return SimpleVocabulary.fromItems(employees)
+
+
 class IOrganizationalUnit(form.Schema):
-    """ A representation of a Content Embedder content type
+    """ A representation of a Organizational Unit content type
     """
 
-    area_manager = RelationList(
+    # TODO: AutocompleteFieldWidget
+    # form.widget()
+    area_manager = Choice(
         title=_(u'Area Manager'),
-        default=[],
-        value_type=RelationChoice(title=u"Area Manager",
-                      source=ObjPathSourceBinder(portal_type='Employee')),
+        description=_(u'Assign one employee as manager for this area.'),
+        source=vocab_employees,
         required=False,
-        )
+    )
+
+    # area_manager = RelationList(
+    #     title=_(u'Area Manager'),
+    #     default=[],
+    #     value_type=RelationChoice(
+    #         title=u"Area Manager",
+    #         source=ObjPathSourceBinder(portal_type='Employee')),
+    #     required=False,
+    # )
 
 
 class OrganizationalUnit(dexterity.Container):
-    """ A Content Embedder
+    """ A Organizational Unit
     """
     grok.implements(IOrganizationalUnit)
 
@@ -38,48 +69,50 @@ class View(dexterity.DisplayForm):
     grok.require('zope2.View')
     grok.name('view')
 
-    def get_father_ou(self):
-        """ Returns the organizationalunit father if exist.
-        """
-        result = None
-        parent = self.context.__parent__
-        is_father = IOrganizationalUnit.providedBy(parent)
-        if is_father:
-            result = {'title': parent.title,
-                      'url': parent.absolute_url()}
-        return result
+    def portal_state(self):
+        portal_state = getMultiAdapter((self.context, self.request),
+                                       name=u'plone_portal_state')
+        return portal_state
 
-    def has_employees(self):
-        """ Tell us if have child employees.
+    def get_parents(self):
+        """ Return the organizational unit parent's breadcrumbs
+            if those parents are organizational units themselves.
         """
-        employees = self.get_child_employees()
-        return len(employees) > 1
+        parents = []
+        obj = self.context
+        while not INavigationRoot.providedBy(obj):
+            obj = obj.__parent__
+            if IOrganizationalUnit.providedBy(obj):
+                parents.insert(0, obj)
+        return parents
 
-    def get_child_ous(self):
-        """ If it have child organizationalunits, then return them.
+    def get_children(self):
+        """ Return child organizational units
         """
         catalog = getToolByName(self.context, 'portal_catalog')
         query = {}
-        query['path'] = '/'.join(self.context.getPhysicalPath()) + '/'
+        query['path'] = {'query': '/'.join(self.context.getPhysicalPath()),
+                         'depth': 1}
         query['portal_type'] = 'OrganizationalUnit'
+        query['sort_on'] = 'sortable_title'
         content = catalog.searchResults(**query)
         return content
 
-    def get_child_employees(self):
-        """ If it have child employees, then return them.
+    def get_employees(self):
+        """ Return organizational unit child employees
         """
         catalog = getToolByName(self.context, 'portal_personcatalog')
         query = {}
-        query['path'] = '/'.join(self.context.getPhysicalPath()) + '/'
+        query['path'] = {'query': '/'.join(self.context.getPhysicalPath()),
+                         'depth': 1}
         query['portal_type'] = 'Employee'
         content = catalog.searchResults(**query)
         return content
 
     def get_employee_batch(self, b_start, first=False, snd=False):
-        """ Return a batch of employees for navigation.
+        """ Return a batch of employees for navigation
         """
-        from Products.CMFPlone import Batch
-        contents = self.get_child_employees()
+        contents = self.get_employees()
         has_employees = self.has_employees()
         if len(contents) < 9 and not snd:
             batch = Batch(contents, len(contents), int(b_start), orphan=0)

@@ -1,60 +1,58 @@
 /*  General */
 
-.portaltype-s17-organizationalunit #father_ou{
+.portaltype-organizationalunit #subarea_of label {
     margin-right: 10px;
 }
 
-.portaltype-s17-organizationalunit #area_manager #gestor{
-    Float: left;
+.portaltype-organizationalunit #area_manager {
+    float: left;
     margin-right: 10px;
 }
 
-.portaltype-s17-organizationalunit .section{
+.portaltype-organizationalunit .section {
     border-bottom: 3px solid;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+    margin: 20px 0 10px;
 }
 
 /* Subareas */
 
-.portaltype-s17-organizationalunit #list_ous{
-    margin-top: 35px;
-    margin-bottom: 30px;
+.portaltype-organizationalunit #subareas {
+    margin: 10px 0 30px;
 }
 
-.portaltype-s17-organizationalunit #list_ous .subarea{
-    border: 1px solid black;
-    padding: 20px;
-    margin-right: 2%;
+.portaltype-organizationalunit #subareas li {
+    outline: 1px solid #ccc;
+    display: inline-block;
+    height: 44px;
+    margin: 10px 20px 0 0;
+    padding-top: 20px;
+    text-align: center;
+    width: 128px;
 }
 
-.portaltype-s17-organizationalunit #list_ous .subarea:hover{
-    border-color: black;
+.portaltype-organizationalunit #subareas a:hover {
+    border-color: #000;
     color: #205C90 !important;
 }
 
 /* Employees table */
 
-.portaltype-s17-organizationalunit td.employee_cell {
-    text-align: center;
+.portaltype-organizationalunit #employee-table {
+    margin-top: 15px;
 }
 
-.portaltype-s17-organizationalunit .cell_content{
-    padding: 0px 20px 20px 0px;
+.portaltype-organizationalunit #employee-table td {
+    padding: 0 20px 20px 0;
+    width: 128px;
 }
 
-.portaltype-s17-organizationalunit .cell_content img{
-    width:128px;
+.portaltype-organizationalunit #employee-table td img {
     display: block;
-    height:128px;
+}
+
+.portaltype-organizationalunit #employee-table td a {
     margin: auto;
 }
 
-.portaltype-s17-organizationalunit .cell_content a{
-    margin: auto;
-}
-
-.portaltype-s17-organizationalunit #employee_table{
-    margin-top: 20px;
-    width: 100%;
-}
