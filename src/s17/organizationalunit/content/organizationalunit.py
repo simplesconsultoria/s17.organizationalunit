@@ -11,12 +11,8 @@ from plone.directives import dexterity
 from zope.component import getMultiAdapter
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary
-from zope.site.hooks import getSite
-#from plone.formwidget.contenttree import ObjPathSourceBinder
-#from plone.formwidget.autocomplete import AutocompleteFieldWidget
 
 from z3c.relationfield.schema import Choice
-#from z3c.relationfield.schema import RelationList
 
 from plone.app.layout.navigation.interfaces import INavigationRoot
 
