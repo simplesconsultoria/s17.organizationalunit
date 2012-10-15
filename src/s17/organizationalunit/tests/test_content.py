@@ -43,8 +43,8 @@ class OrganizationalUnitTestCase(unittest.TestCase):
         self.assertTrue(verifyObject(IEmployee, e1))
 
     def test_add_ou(self):
-        self.ou.invokeFactory('OrganizationalUnit', 'sub_ou')
-        sub_ou = self.ou['sub_ou']
+        self.ou.invokeFactory('OrganizationalUnit', 'sub-ou')
+        sub_ou = self.ou['sub-ou']
         self.assertTrue(verifyObject(IOrganizationalUnit, sub_ou))
 
 
@@ -59,55 +59,52 @@ class OrganizationalUnitViewTest(unittest.TestCase):
         self.create_ous()
         self.create_employees()
         self.ou_view = self.ou.unrestrictedTraverse('view')
-        self.subou_view = self.subou.unrestrictedTraverse('view')
-        self.subsubou_view = self.subsubou.unrestrictedTraverse('view')
+        self.sub_ou_view = self.sub_ou.unrestrictedTraverse('view')
+        self.sub_sub_ou_view = self.sub_sub_ou.unrestrictedTraverse('view')
 
     def create_ous(self):
-        # Create organizationalunit objects
+        """  Create organizationalunit objects
+        """
         self.portal.invokeFactory('OrganizationalUnit', 'ou')
         self.ou = self.portal['ou']
-        self.ou.invokeFactory('OrganizationalUnit', 'subou')
-        self.subou = self.ou['subou']
-        self.subou.invokeFactory('OrganizationalUnit', 'subsubou')
-        self.subsubou = self.subou['subsubou']
+        self.ou.invokeFactory('OrganizationalUnit', 'sub-ou')
+        self.sub_ou = self.ou['sub-ou']
+        self.sub_ou.invokeFactory('OrganizationalUnit', 'sub-sub-ou')
+        self.sub_sub_ou = self.sub_ou['sub-sub-ou']
 
     def create_employees(self):
-        # Create Employees objects
+        """ Create Employees objects
+        """
         index = 1
         while index < 17:
-            self.ou.invokeFactory('Employee',
-                                  'employee-%s' % index)
+            self.ou.invokeFactory('Employee', 'employee-%s' % index)
             index += 1
-        self.subou.invokeFactory('Employee', 'subemployee')
-        self.subsubou.invokeFactory('Employee',
-                                    'subsubemployee')
+        self.sub_ou.invokeFactory('Employee', 'sub-employee')
+        self.sub_sub_ou.invokeFactory('Employee', 'sub-sub-employee')
 
-    def test_father_ou(self):
-        father = self.subou_view.get_father_ou()
-        self.assertEqual(father['url'], self.ou.absolute_url())
+    def test_get_parents(self):
+        parent = self.sub_ou_view.get_parents()[0]
+        self.assertEqual(parent.absolute_url(), self.ou.absolute_url())
 
-    def test_child_ous(self):
-        childs = self.ou_view.get_child_ous()
-        self.assertEqual(len(childs), 3)
-        self.assertEqual(childs[1].getId, 'subou')
-        self.assertEqual(childs[2].getId, 'subsubou')
+    def test_get_children(self):
+        children = self.ou_view.get_children()
+        self.assertEqual(len(children), 1)
+        self.assertEqual(children[0].getId, 'sub-ou')
 
-    def test_child_employees(self):
-        childs = self.ou_view.get_child_employees()
-        self.assertEqual(len(childs), 18)
+    def test_get_employees(self):
+        children = self.ou_view.get_employees()
+        self.assertEqual(len(children), 16)
 
-    def test_employee_batch_simple_page(self):
-        batch = self.subou_view.get_employee_batch(b_start=0)
-        self.assertEqual(len(batch), 2)
-        #import pdb;pdb.set_trace()
-        self.assertEqual(batch[0].getObject().getId(), 'subemployee')
-        self.assertEqual(batch[1].getObject().getId(), 'subsubemployee')
-
-        batch = self.subsubou_view.get_employee_batch(b_start=0)
+    def test_get_employee_batch_simple_page(self):
+        batch = self.sub_ou_view.get_employee_batch(b_start=0)
         self.assertEqual(len(batch), 1)
-        self.assertEqual(batch[0].getObject().getId(), 'subsubemployee')
+        self.assertEqual(batch[0].getObject().getId(), 'sub-employee')
 
-    def test_employee_batch_multiple_pages(self):
+        batch = self.sub_sub_ou_view.get_employee_batch(b_start=0)
+        self.assertEqual(len(batch), 1)
+        self.assertEqual(batch[0].getObject().getId(), 'sub-sub-employee')
+
+    def test_get_employee_batch_multiple_pages(self):
         # Page 1
         batch = self.ou_view.get_employee_batch(b_start=0)
         self.assertEqual(len(batch), 8)
@@ -134,11 +131,9 @@ class OrganizationalUnitViewTest(unittest.TestCase):
 
         # Page 3
         batch = self.ou_view.get_employee_batch(b_start=16)
-        self.assertEqual(len(batch), 2)
-        self.assertEqual(batch[0].getObject().getId(), 'subemployee')
-        self.assertEqual(batch[1].getObject().getId(), 'subsubemployee')
+        self.assertEqual(len(batch), 1)
 
-    def test_batch_rows(self):
+    def test_get_batch_rows(self):
         batch = self.ou_view.get_employee_batch(b_start=0, first=True)
         self.assertEqual(len(batch), 4)
         self.assertEqual(batch[0].getObject().getId(), 'employee-1')
