@@ -11,7 +11,6 @@ from plone.directives import dexterity
 from zope.component import getMultiAdapter
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.site.hooks import getSite
 #from plone.formwidget.contenttree import ObjPathSourceBinder
 #from plone.formwidget.autocomplete import AutocompleteFieldWidget
 
