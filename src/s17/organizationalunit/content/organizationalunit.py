@@ -10,7 +10,7 @@ from plone.directives import dexterity
 
 from zope.component import getMultiAdapter
 from zope.schema.interfaces import IContextSourceBinder
-from zope.schema.vocabulary import SimpleVocabulary
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.site.hooks import getSite
 #from plone.formwidget.contenttree import ObjPathSourceBinder
 #from plone.formwidget.autocomplete import AutocompleteFieldWidget
@@ -31,8 +31,8 @@ def vocab_employees(context):
                      'depth': 2}
     query['portal_type'] = 'Employee'
     query['sort_on'] = 'sortable_title'
-    employees = [(b.Title, b.UID) for b in ct.searchResults(**query)]
-    return SimpleVocabulary.fromItems(employees)
+    employees = [SimpleTerm(b.UID, b.UID, b.Title) for b in ct.searchResults(**query)]
+    return SimpleVocabulary(employees)
 
 
 class IOrganizationalUnit(form.Schema):
