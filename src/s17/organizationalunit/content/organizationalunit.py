@@ -16,7 +16,6 @@ from zope.site.hooks import getSite
 #from plone.formwidget.autocomplete import AutocompleteFieldWidget
 
 from z3c.relationfield.schema import Choice
-#from z3c.relationfield.schema import RelationList
 
 from plone.app.layout.navigation.interfaces import INavigationRoot
 
