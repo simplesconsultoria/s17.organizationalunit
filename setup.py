@@ -30,7 +30,7 @@ setup(name='s17.organizationalunit',
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
         "Topic :: Office/Business",
         "Topic :: Software Development :: Libraries :: Python Modules",
-        ],
+      ],
       keywords='s17.organizationalunit organizational unit',
       author='Simples Consultoria',
       author_email='products@simplesconsultoria.com.br',
@@ -54,8 +54,12 @@ setup(name='s17.organizationalunit',
           's17.employee',
       ],
       extras_require={
-        'test': ['plone.app.testing'],
-        },
+          'test': [
+              'plone.app.testing',
+              'robotsuite',
+              'robotframework-selenium2library',
+          ],
+      },
       entry_points="""
         [z3c.autoinclude.plugin]
         target = plone
