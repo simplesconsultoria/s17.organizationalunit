@@ -32,8 +32,8 @@
         tal:condition="parents">
         <label i18n:translate="">Subarea of</label>
         <span tal:repeat="parent parents"
-              tal:attributes="dir python:is_rtl and 'rtl' or 'ltr';
-                              id string:ou-parent-${repeat/parent/number}">
+            tal:attributes="dir python:is_rtl and 'rtl' or 'ltr';
+                            id string:ou-parent-${repeat/parent/number}">
             <tal:item define="url parent/absolute_url; title parent/Title">
             <a tal:omit-tag="not:url"
                tal:attributes="href url; title parent/Title"
@@ -71,37 +71,37 @@
         <tr tal:define="top_row python:view.get_employee_batch(b_start, first=True)"
             tal:condition="top_row">
             <td tal:repeat="employee top_row">
-                <tal:block define="employee employee/getObject;
-                                   picture nocall:employee/picture">
-                <a tal:attributes="href employee/absolute_url;
-                                   title employee/Title">
-                    <img tal:condition="nocall:picture"
-                        tal:attributes="src string:${employee/absolute_url}/@@images/picture/mini" />
-                    <img width="128"
-                        tal:condition="not:nocall:picture"
-                        tal:attributes="src string:${portal_url}/defaultUser.png" />
-                </a>
-                <a tal:content="employee/Title"
-                    tal:attributes="href employee/absolute_url" />
-                </tal:block>
+                <div tal:define="employee employee/getObject;
+                                 picture nocall:employee/picture">
+                    <a tal:attributes="href employee/absolute_url;
+                                       title employee/Title">
+                        <img tal:condition="nocall:picture"
+                            tal:attributes="src string:${employee/absolute_url}/@@images/picture/mini" />
+                        <img width="128"
+                            tal:condition="not:nocall:picture"
+                            tal:attributes="src string:${portal_url}/defaultUser.png" />
+                    </a>
+                    <a tal:content="employee/Title"
+                        tal:attributes="href employee/absolute_url" />
+                </div>
             </td>
         </tr>
         <tr tal:define="bottom_row python:view.get_employee_batch(b_start, snd=True)"
             tal:condition="bottom_row">
             <td tal:repeat="employee bottom_row">
-                <tal:block define="employee employee/getObject;
-                                   picture nocall:employee/picture">
-                <a tal:attributes="href employee/absolute_url;
-                                   title employee/Title">
-                    <img tal:condition="nocall:picture"
-                        tal:attributes="src string:${employee/absolute_url}/@@images/picture/mini" />
-                    <img width="128"
-                        tal:condition="not:nocall:picture"
-                        tal:attributes="src string:${portal_url}/defaultUser.png" />
-                </a>
-                <a tal:content="employee/Title"
-                    tal:attributes="href employee/absolute_url" />
-                </tal:block>
+                <div tal:define="employee employee/getObject;
+                                 picture nocall:employee/picture">
+                    <a tal:attributes="href employee/absolute_url;
+                                       title employee/Title">
+                        <img tal:condition="nocall:picture"
+                            tal:attributes="src string:${employee/absolute_url}/@@images/picture/mini" />
+                        <img width="128"
+                            tal:condition="not:nocall:picture"
+                            tal:attributes="src string:${portal_url}/defaultUser.png" />
+                    </a>
+                    <a tal:content="employee/Title"
+                        tal:attributes="href employee/absolute_url" />
+                </div>
             </td>
         </tr>
     </table>

@@ -11,7 +11,6 @@ from plone.directives import dexterity
 from zope.component import getMultiAdapter
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-#from plone.formwidget.contenttree import ObjPathSourceBinder
 #from plone.formwidget.autocomplete import AutocompleteFieldWidget
 
 from z3c.relationfield.schema import Choice
@@ -26,10 +25,10 @@ def vocab_employees(context):
     ct = getToolByName(context, 'portal_catalog')
     query = {}
     query['path'] = {'query': '/'.join(context.getPhysicalPath()),
-                     'depth': 2}
+                     'depth': 1}
     query['portal_type'] = 'Employee'
     query['sort_on'] = 'sortable_title'
-    employees = [SimpleTerm(b.UID, b.UID, b.Title) for b in ct.searchResults(**query)]
+    employees = [SimpleTerm(b.UID, b.UID, b.Title) for b in ct.searchResults(query)]
     return SimpleVocabulary(employees)
 
 
@@ -45,15 +44,6 @@ class IOrganizationalUnit(form.Schema):
         source=vocab_employees,
         required=False,
     )
-
-    # area_manager = RelationList(
-    #     title=_(u'Area Manager'),
-    #     default=[],
-    #     value_type=RelationChoice(
-    #         title=u"Area Manager",
-    #         source=ObjPathSourceBinder(portal_type='Employee')),
-    #     required=False,
-    # )
 
 
 class OrganizationalUnit(dexterity.Container):
@@ -72,12 +62,14 @@ class View(dexterity.DisplayForm):
                                        name=u'plone_portal_state')
         return portal_state
 
-    def get_parents(self):
-        """ Return the organizational unit parent's breadcrumbs
-            if those parents are organizational units themselves.
+    def get_parents(self, full_path=False):
+        """ Return the organizational unit parents if those are organizational
+        units themselves. If full_path is True, also returns the object itself.
         """
         parents = []
         obj = self.context
+        if full_path:
+            parents.append(obj)
         while not INavigationRoot.providedBy(obj):
             obj = obj.__parent__
             if IOrganizationalUnit.providedBy(obj):
